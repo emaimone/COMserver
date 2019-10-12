@@ -1,0 +1,26 @@
+Public PythonUtils As Object
+'---------------------------------------------------------------------------------------
+Sub Get_Started()
+    If PythonUtils Is Nothing Then
+    
+        On Error Resume Next
+        
+        Set PythonUtils = CreateObject("PythonZ.COMTest")
+        Debug.Print "creating object"
+        
+        errnum = Err.Description
+        On Error GoTo 0
+        
+        If errnum <> "" Then
+            Debug.Print errnum
+        End If
+    
+    Else
+        Debug.Print "object exists yet"
+    End If
+    
+    r2 = PythonUtils.where_am_i()
+    Debug.Print r2
+    Application.ActiveWorkbook.Sheets("Sheet1").Range("D3").Value = "running from " & r2
+    
+End Sub
